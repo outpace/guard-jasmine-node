@@ -12,6 +12,7 @@ module Guard
       :coffeescript     => true,
       :verbose          => false,
       :forceexit        => false,
+      :env              => {},
       :spec_paths       => %w(spec)
     }
 

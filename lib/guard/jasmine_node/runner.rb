@@ -15,6 +15,10 @@ module Guard
       end
 
       private
+      def self.environment_variables
+        return if @options[:env].nil?
+        "export " + @options[:env].map {|key, value| "#{key}=#{value}"}.join(' ') + ';'
+      end
 
       def self.print_message
         message = @options[:message]
@@ -27,7 +31,7 @@ module Guard
       end
 
       def self.jasmine_node_command
-        "#{@options[:jasmine_node_bin]} #{command_line_options} #{@paths.join(' ')}"
+        "#{environment_variables}#{@options[:jasmine_node_bin]} #{command_line_options} #{@paths.join(' ')}"
       end
 
       def self.command_line_options
